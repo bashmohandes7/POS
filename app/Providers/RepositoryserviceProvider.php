@@ -13,7 +13,10 @@ class RepositoryserviceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(
+            'App\Http\Interfaces\DashboardInterface',
+            'App\Http\Repositories\DashboardRepository'
+        );
     }
 
     /**
