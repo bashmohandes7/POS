@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Laratrust\Traits\LaratrustUserTrait;
 
@@ -23,6 +25,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'image'
     ];
 
     /**
@@ -43,4 +46,29 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    protected $appends = ['image_path'];
+
+    public  function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = Hash::make($password);
+    }
+    // make name capitalized
+    public function getNameAttribute($value)
+    {
+        return Str::title($value);
+    }
+
+    public function scopeWhenSearch($query, $search)
+    {
+        return $query->when($search, function ($q) use ($search) {
+
+            return $q->where('name', 'like', '%' . $search . '%');
+        });
+
+    }// end of scopeWhenSearch
+
+    public function getImagePathAttribute()
+    {
+        return asset('uploads/user_images/' . $this->image);
+    } // end of get image path
 }

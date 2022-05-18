@@ -17,6 +17,10 @@ class RepositoryserviceProvider extends ServiceProvider
             'App\Http\Interfaces\DashboardInterface',
             'App\Http\Repositories\DashboardRepository'
         );
+        $this->app->bind(
+            'App\Http\Interfaces\UserInterface',
+            'App\Http\Repositories\UserRepository'
+        );
     }
 
     /**

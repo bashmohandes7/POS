@@ -1,5 +1,5 @@
 @extends('layouts.dashboard.app')
-
+@section('title', __('site.dashboard'))
 @section('content')
 
     <div class="content-wrapper">

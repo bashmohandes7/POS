@@ -3,6 +3,7 @@
 return [
     'dashboard' => 'الرئيسية',
     'logout' => 'تسجيل الخروج',
+    'unknown_page' => 'الصفحة غير معروفة',
 
     'add' => 'اضف',
     'create' => 'اضافه',
@@ -21,6 +22,7 @@ return [
 
     'login' => 'تسجيل الدخول',
     'remember_me' => 'تذكرني',
+    'forget_password' =>'هل نسيت كلمة المرور؟',
     'password' => 'كلمه المرور',
     'password_confirmation' => 'تاكيد كلمه المرور',
 
@@ -33,7 +35,7 @@ return [
 
     'clients' => 'العملاء',
     'client_name' => 'اسم العميل',
-    'phone' => 'التلفون',
+    'phone' => 'التليفون',
     'address' => 'العنوان',
     'previous_orders' => 'الطلبات السابقه',
     'orders' => 'الطلبات',
@@ -41,27 +43,25 @@ return [
     'edit_order' => 'تعديل طلب',
 
     'users' => 'المشرفين',
-    'first_name' => 'الاسم الاول',
-    'last_name' => 'الاسم الاخير',
-    'email' => 'البريد الاكتروني',
-    'image' => 'صوره',
-    'action' => 'اكشن',
+    'name' => 'الاسم',
+    'email' => 'البريد الإلكنرونى',
+    'image' => 'صورة',
+    'action' => 'عملية',
 
     'permissions' => 'الصلاحيات',
 
-    'categories' => 'الاقسام',
+    'categories' => 'الأقسام',
     'all_categories' => 'كل الاقسام',
-    'name' => 'الاسم',
     'description' => 'الوصف',
     'products_count' => 'عدد الامنتجات',
-    'related_products' => 'المنتجات المرتبطه',
+    'related_products' => 'المنتجات المرتبطة',
     'category' => 'القسم',
     'show_products' => 'عرض المنتجات',
     'created_at' => 'تم اضافته',
 
     'products' => 'المنتجات',
     'product' => 'المنتج',
-    'quantity' => 'الكميه',
+    'quantity' => 'الكمية',
     'total' => 'المجموع',
     'purchase_price' => 'سعر الشراء',
     'price' => 'السعر',
@@ -70,13 +70,13 @@ return [
     'profit_percent' => 'المكسب',
 
     'ar' => [
-        'name' => 'الاسم بالغه العربيه',
-        'description' => 'الوصف بالغه العربيه',
+        'name' => 'الاسم باللغة العربية',
+        'description' => 'الوصف باللغة العربية',
     ],
 
     'en' => [
-        'name' => 'الاسم بالغه الانجليزيه',
-        'description' => 'الوصف بالغه الانجليزيه',
+        'name' => 'الاسم باللغة  الانجليزية',
+        'description' => 'الوصف باللغة  الانجليزية',
     ],
 
 ];

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Blank Page</title>
+    <title>@yield('title', __('site.unknown_page'))</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     {{--<!-- Bootstrap 3.3.7 -->--}}
@@ -187,8 +187,8 @@
                     <li class="dropdown user user-menu">
 
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
-{{--                            <span class="hidden-xs">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</span>--}}
+                            <img src="{{ auth()->user()->image_path }}" class="user-image" alt="User Image">
+                            <span class="hidden-xs">{{ auth()->user()->name }}</span>
                         </a>
                         <ul class="dropdown-menu">
 
@@ -197,7 +197,7 @@
                                 <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
 
                                 <p>
-{{--                                    {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}--}}
+                                    {{ auth()->user()->name }}
                                     <small>Member since 2 days</small>
                                 </p>
                             </li>
@@ -305,20 +305,20 @@
 
         });//end of delete
 
-        // // image preview
-        // $(".image").change(function () {
-        //
-        //     if (this.files && this.files[0]) {
-        //         var reader = new FileReader();
-        //
-        //         reader.onload = function (e) {
-        //             $('.image-preview').attr('src', e.target.result);
-        //         }
-        //
-        //         reader.readAsDataURL(this.files[0]);
-        //     }
-        //
-        // });
+        // image preview
+        $(".image").change(function () {
+
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('.image-preview').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(this.files[0]);
+            }
+
+        });
 
         CKEDITOR.config.language =  "{{ app()->getLocale() }}";
 
