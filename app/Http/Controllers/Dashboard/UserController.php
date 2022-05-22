@@ -42,5 +42,5 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         return $this->userInterface->destroy($user);
-    }
+    } // end of destroy
 }

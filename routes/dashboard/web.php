@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\UserController;
 use Illuminate\Support\Facades\Route;
@@ -14,7 +15,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
         // Dashboard Routes
         Route::get('index', [DashboardController::class, 'index'])->name('welcome');
 
-        // Users Routes
+        // User Routes
         Route::get('/users', [UserController::class, 'index'])
             ->name('users.index')
             ->middleware('permission:read_users');
@@ -33,6 +34,29 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
         Route::delete('/users/destroy/{user}', [UserController::class, 'destroy'])
             ->name('users.destroy')
             ->middleware('permission:delete_users');
+
+        // Category Routes
+
+        Route::get('/categories', [CategoryController::class, 'index'])
+            ->name('categories.index')
+            ->middleware('permission:read_categories');
+
+        Route::get('/categories/create', [CategoryController::class, 'create'])
+            ->name('categories.create')
+            ->middleware('permission:create_categories');
+
+        Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store');
+
+        Route::get('/categories/edit/{category}', [CategoryController::class, 'edit'])
+            ->name('categories.edit')
+            ->middleware('permission:update_categories');
+
+        Route::put('/categories/update/{category}', [CategoryController::class, 'update'])->name('categories.update');
+
+        Route::delete('/categories/destroy/{category}', [CategoryController::class, 'destroy'])
+            ->name('categories.destroy')
+            ->middleware('permission:delete_categories');
+
 
     }); // end of dashboard routes
 
