@@ -31,9 +31,10 @@ class UserRepository implements UserInterface
                ->resize(300, null, function ($constraint) {
                    $constraint->aspectRatio();
                })->save(public_path('uploads/user_images/' . $request->image->hashName()));
+               $request_data['image'] = $request->image->hashName();
         } // end of if
 
-        $request_data['image'] = $request->image->hashName();
+
 
         $user = User::create($request_data);
 

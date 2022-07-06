@@ -8,9 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    use HasFactory;
-
-    use Translatable;
+    use HasFactory, Translatable;
 
     public $translatedAttributes = ['name'];
     protected $guarded= [];
@@ -23,4 +21,10 @@ class Category extends Model
         });
 
     }// end of scopeWhenSearch
-}
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    } // end of products relationship
+
+} // end of model
