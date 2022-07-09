@@ -1,11 +1,12 @@
 <?php
 
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Dashboard\ClientController;
+use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\Dashboard\ProductController;
-use App\Http\Controllers\Dashboard\UserController;
-use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
@@ -90,6 +91,33 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
             Route::delete('destroy/{product}', [ProductController::class, 'destroy'])
                 ->name('destroy')
                 ->middleware('permission:delete_products');
+
+        }); // end of product routes
+
+
+         // Client Routes
+
+         Route::group(['prefix'=> 'clients', 'as'=>'clients.'], function(){
+
+            Route::get('/', [ClientController::class, 'index'])
+                ->name('index')
+                ->middleware('permission:read_clients');
+
+            Route::get('create', [ClientController::class, 'create'])
+                ->name('create')
+                ->middleware('permission:create_clients');
+
+            Route::post('store', [ClientController::class, 'store'])->name('store');
+
+            Route::get('edit/{client}', [ClientController::class, 'edit'])
+                ->name('edit')
+                ->middleware('permission:update_clients');
+
+            Route::put('update/{client}', [ClientController::class, 'update'])->name('update');
+
+            Route::delete('destroy/{client}', [ClientController::class, 'destroy'])
+                ->name('destroy')
+                ->middleware('permission:delete_clients');
 
         }); // end of product routes
 
