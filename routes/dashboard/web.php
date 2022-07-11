@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\Client\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\ClientController;
@@ -19,49 +19,54 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
 
         // User Routes
         Route::group(['prefix'=> 'users', 'as' => 'users.'], function(){
+            Route::controller(UserController::class)->group(function (){
+                Route::get('/', 'index')
+                    ->name('index')
+                    ->middleware('permission:read_users');
 
-            Route::get('/', [UserController::class, 'index'])
-                ->name('index')
-                ->middleware('permission:read_users');
+                Route::get('/create', 'create')
+                    ->name('create')
+                    ->middleware('permission:create_users');
 
-            Route::get('/create', [UserController::class, 'create'])
-                ->name('create')
-                ->middleware('permission:create_users');
+                Route::post('store','store')->name('store');
+                Route::get('edit/{user}', [UserController::class, 'edit'])
+                    ->name('edit')
+                    ->middleware('permission:update_users');
 
-            Route::post('store', [UserController::class, 'store'])->name('store');
-            Route::get('edit/{user}', [UserController::class, 'edit'])
-                ->name('edit')
-                ->middleware('permission:update_users');
+                Route::put('update/{user}', 'update')->name('update');
 
-            Route::put('update/{user}', [UserController::class, 'update'])->name('update');
+                Route::delete('destroy/{user}', 'destroy')
+                    ->name('destroy')
+                    ->middleware('permission:delete_users');
+            }); // end of controller
 
-            Route::delete('destroy/{user}', [UserController::class, 'destroy'])
-                ->name('destroy')
-                ->middleware('permission:delete_users');
         }); // end of user Routes
 
 
         // Category Routes
         Route::group(['prefix'=> 'categories', 'as'=> 'categories.'], function(){
-            Route::get('/', [CategoryController::class, 'index'])
-                ->name('index')
-                ->middleware('permission:read_categories');
+            Route::controller(CategoryController::class)->group(function(){
 
-            Route::get('create', [CategoryController::class, 'create'])
-                ->name('create')
-                ->middleware('permission:create_categories');
+                Route::get('/', 'index')
+                    ->name('index')
+                    ->middleware('permission:read_categories');
 
-            Route::post('store', [CategoryController::class, 'store'])->name('store');
+                Route::get('create', 'create')
+                    ->name('create')
+                    ->middleware('permission:create_categories');
 
-            Route::get('edit/{category}', [CategoryController::class, 'edit'])
-                ->name('edit')
-                ->middleware('permission:update_categories');
+                Route::post('store', 'store')->name('store');
 
-            Route::put('update/{category}', [CategoryController::class, 'update'])->name('update');
+                Route::get('edit/{category}', 'edit')
+                    ->name('edit')
+                    ->middleware('permission:update_categories');
 
-            Route::delete('destroy/{category}', [CategoryController::class, 'destroy'])
-                ->name('destroy')
-                ->middleware('permission:delete_categories');
+                Route::put('update/{category}', 'update')->name('update');
+
+                Route::delete('destroy/{category}', 'destroy')
+                    ->name('destroy')
+                    ->middleware('permission:delete_categories');
+            }); // end of controller
 
 
         }); // end of category routes
@@ -72,25 +77,29 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
 
         Route::group(['prefix'=> 'products', 'as'=>'products.'], function(){
 
-            Route::get('/', [ProductController::class, 'index'])
-                ->name('index')
-                ->middleware('permission:read_products');
+            Route::controller(ProductController::class)->group(function (){
 
-            Route::get('create', [ProductController::class, 'create'])
-                ->name('create')
-                ->middleware('permission:create_products');
+                Route::get('/','index')
+                    ->name('index')
+                    ->middleware('permission:read_products');
 
-            Route::post('store', [ProductController::class, 'store'])->name('store');
+                Route::get('create', 'create')
+                    ->name('create')
+                    ->middleware('permission:create_products');
 
-            Route::get('edit/{product}', [ProductController::class, 'edit'])
-                ->name('edit')
-                ->middleware('permission:update_products');
+                Route::post('store', 'store')->name('store');
 
-            Route::put('update/{product}', [ProductController::class, 'update'])->name('update');
+                Route::get('edit/{product}', 'edit')
+                    ->name('edit')
+                    ->middleware('permission:update_products');
 
-            Route::delete('destroy/{product}', [ProductController::class, 'destroy'])
-                ->name('destroy')
-                ->middleware('permission:delete_products');
+                Route::put('update/{product}',  'update')->name('update');
+
+                Route::delete('destroy/{product}', 'destroy')
+                    ->name('destroy')
+                    ->middleware('permission:delete_products');
+            }); // end of controller
+
 
         }); // end of product routes
 
@@ -99,27 +108,60 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
 
          Route::group(['prefix'=> 'clients', 'as'=>'clients.'], function(){
 
-            Route::get('/', [ClientController::class, 'index'])
-                ->name('index')
-                ->middleware('permission:read_clients');
+             Route::controller(ClientController::class)->group(function(){
 
-            Route::get('create', [ClientController::class, 'create'])
-                ->name('create')
-                ->middleware('permission:create_clients');
+                 Route::get('/', 'index')
+                     ->name('index')
+                     ->middleware('permission:read_clients');
 
-            Route::post('store', [ClientController::class, 'store'])->name('store');
+                 Route::get('create', 'create')
+                     ->name('create')
+                     ->middleware('permission:create_clients');
 
-            Route::get('edit/{client}', [ClientController::class, 'edit'])
-                ->name('edit')
-                ->middleware('permission:update_clients');
+                 Route::post('store', 'store')->name('store');
 
-            Route::put('update/{client}', [ClientController::class, 'update'])->name('update');
+                 Route::get('edit/{client}', 'edit')
+                     ->name('edit')
+                     ->middleware('permission:update_clients');
 
-            Route::delete('destroy/{client}', [ClientController::class, 'destroy'])
-                ->name('destroy')
-                ->middleware('permission:delete_clients');
+                 Route::put('update/{client}', 'update')->name('update');
 
-        }); // end of product routes
+                 Route::delete('destroy/{client}', 'destroy')
+                     ->name('destroy')
+                     ->middleware('permission:delete_clients');
+             }); // end of controller
+
+
+        }); // end of client routes
+
+        Route::group(['prefix' => 'orders', 'as' => 'orders.'], function (){
+
+            Route::controller(OrderController::class)->group(function(){
+
+                Route::get('/', 'index')
+                    ->name('index')
+                    ->middleware('permission:read_orders');
+
+                Route::get('create/{client}', 'create')
+                    ->name('create')
+                    ->middleware('permission:create_orders');
+
+                Route::post('store', 'store')
+                    ->name('store');
+
+                Route::get('edit/{client}/{order}','edit')
+                    ->name('edit')
+                    ->middleware('permission:update_orders');
+
+                Route::put('update/{client}/{order}', 'update')->name('update');
+
+                Route::delete('destroy/{client}/{order}', 'destroy')
+                    ->name('destroy')
+                    ->middleware('permission:delete_orders');
+            }); // end of controller
+
+
+        }); // end of order routes
 
 
 
