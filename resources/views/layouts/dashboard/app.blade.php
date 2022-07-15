@@ -72,6 +72,7 @@
     <script src="{{ asset('dashboard_files/plugins/noty/noty.min.js') }}"></script>
 
     {{--morris--}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <link rel="stylesheet" href="{{ asset('dashboard_files/plugins/morris/morris.css') }}">
 
     {{--<!-- iCheck -->--}}
