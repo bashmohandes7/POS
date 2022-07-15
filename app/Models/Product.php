@@ -51,5 +51,11 @@ class Product extends Model
         });
     }
 
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class, 'product_order');
+
+    } // end  of orders
+
 
 } // end of model

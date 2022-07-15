@@ -1,5 +1,5 @@
 @extends('layouts.dashboard.app')
-
+@section('title', __('site.orders'))
 @section('content')
 
     <div class="content-wrapper">
@@ -109,7 +109,7 @@
 
                         <div class="box-body">
 
-                            @include('partials._errors')
+                            @include('partials. _errors')
 
                             <form action="{{ route('dashboard.clients.orders.update', ['order' => $order->id, 'client' => $client->id]) }}" method="post">
 

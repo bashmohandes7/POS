@@ -71,7 +71,7 @@
                                     <td>{{ $client->address }}</td>
                                      <td>
                                         @if (auth()->user()->hasPermission('create_orders'))
-                                            <a href="{{ route('dashboard.orders.create', $client->id) }}" class="btn btn-primary btn-sm">@lang('site.add_order')</a>
+                                            <a href="{{ route('dashboard.clients.orders.create', $client->id) }}" class="btn btn-primary btn-sm">@lang('site.add_order')</a>
                                         @else
                                             <a href="#" class="btn btn-primary btn-sm disabled">@lang('site.add_order')</a>
                                         @endif

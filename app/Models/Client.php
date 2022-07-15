@@ -30,4 +30,9 @@ class Client extends Model
             ->orWhere('address', 'LIKE', "%{$search}%");
         });
     }// end of scopeWhenSearch
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }
